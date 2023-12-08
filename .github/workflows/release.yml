@@ -27,7 +27,6 @@ jobs:
       - name: Build project
         run: |
           ./gradlew :cli:fatBinary
-          mv cli/projectGraphMetrics projectGraphMetrics
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -45,6 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./projectGraphMetrics
+          asset_path: ./cli/projectGraphMetrics
           asset_name: projectGraphMetrics
           asset_content_type: application/octet-stream
