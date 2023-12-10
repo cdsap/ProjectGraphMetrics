@@ -55,7 +55,7 @@ Additionally, the CLI generates the following files:
 * top_ten_module_report.txt
 ##### Getting the CLI
 ```
- curl -L https://github.com/cdsap/ProjectGraphMetrics/releases/download/v.0.1.0/projectGraphMetrics --output projectGraphMetrics
+ curl -L https://github.com/cdsap/ProjectGraphMetrics/releases/download/v0.1.0/projectGraphMetrics --output projectGraphMetrics
  chmod 0757 projectGenerator
 
 ```
