@@ -9,18 +9,18 @@ Given a `.dot` file, it returns the following graph metrics:
 
 #### Library
 Dependency:
-```
+```kotlin
 dependencies {
     implementation("io.github.cdsap:projectgraphmetrics:0.1.0")
 }
 ```
 Get metrics:
-```
-    GraphParser(filePath).getIndicatorsByModule()
+```kotlin
+GraphParser(filePath).getIndicatorsByModule()
 ```
 #### CLI
 Example `nowinandroid`
-```
+```kotlin
 ./projetGraphMetrics --file=nowinandroid.dot
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                           Top Ten Module Report                                            │
@@ -50,22 +50,21 @@ Example `nowinandroid`
 
 ```
 Additionally, the CLI generates the following files:
-* modules_report.csv
-* modules_report.txt
-* top_ten_module_report.txt
+* `modules_report.csv`
+* `modules_report.txt`
+* `top_ten_module_report.txt`
 ##### Getting the CLI
-```
- curl -L https://github.com/cdsap/ProjectGraphMetrics/releases/download/v.0.1.0/projectGraphMetrics --output projectGraphMetrics
- chmod 0757 projectGenerator
-
+```bash
+curl -L https://github.com/cdsap/ProjectGraphMetrics/releases/download/v.0.1.0/projectGraphMetrics --output projectGraphMetrics
+chmod 0757 projectGenerator
 ```
 
 ### Generating Dot files
 Gradle Plugins generating graph files:
 #### Graph Assert
 https://github.com/jraska/modules-graph-assert
-```
- ./gradlew generateModulesGraphvizText -Pmodules.graph.output.gv=all_modules
+```bash
+./gradlew generateModulesGraphvizText -Pmodules.graph.output.gv=all_modules
 ```
 
 #### Dependency Analysis
