@@ -62,14 +62,12 @@ Additionally, the CLI generates the following files:
 
 ### Generating Dot files
 Gradle Plugins generating graph files:
-#### Graph Assert
-https://github.com/jraska/modules-graph-assert
-```
- ./gradlew generateModulesGraphvizText -Pmodules.graph.output.gv=all_modules
-```
 
-#### Dependency Analysis
-https://github.com/autonomousapps/dependency-analysis-gradle-plugin
+- [jraska/modules-graph-assert](https://github.com/jraska/modules-graph-assert)
+  ```bash
+  ./gradlew generateModulesGraphvizText -Pmodules.graph.output.gv=all_modules
+  ```
+- [autonomousapps/dependency-analysis-gradle-plugin](https://github.com/autonomousapps/dependency-analysis-gradle-plugin)
 
 ### Libraries used
 * clikt
