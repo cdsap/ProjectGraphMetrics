@@ -71,8 +71,8 @@ https://github.com/jraska/modules-graph-assert
 https://github.com/autonomousapps/dependency-analysis-gradle-plugin
 
 ### Libraries used
-* clikt
-* jgrapht-core
-* kotlin-statistics
-* picnic
-* fatBinary
+* [clikt](https://github.com/ajalt/clikt)
+* [jgrapht-core](https://github.com/jgrapht/jgrapht)
+* [kotlin-statistics](https://central.sonatype.com/artifact/org.nield/kotlin-statistics)
+* [picnic](https://github.com/JakeWharton/picnic)https://github.com/JakeWharton/picnic
+* [fatBinary](https://github.com/cdsap/FatBinary)https://github.com/cdsap/FatBinary
