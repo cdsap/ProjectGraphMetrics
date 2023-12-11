@@ -62,7 +62,7 @@ class GraphViewWriter(private val modules: Map<String, GraphMetric>) {
                     cell("BetweennessCentrality") {
                         columnSpan = 2
                     }
-                    cell("Heigt") {
+                    cell("Height") {
                         columnSpan = 2
                     }
                 }
@@ -104,13 +104,14 @@ class GraphViewWriter(private val modules: Map<String, GraphMetric>) {
                 cellStyle {
                     border = true
                     alignment = TextAlignment.MiddleLeft
-                    padding = 1
+                    paddingLeft = 1
+                    paddingRight = 1
                 }
                 body {
                     row {
                         cell("Module")
                         cell("Indegree")
-                        cell("Outdegre")
+                        cell("Outdegree")
                         cell("BetweennessCentrality")
                         cell("Height")
                     }
