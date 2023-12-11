@@ -9,18 +9,18 @@ Given a `.dot` file, it returns the following graph metrics:
 
 #### Library
 Dependency:
-```
+```kotlin
 dependencies {
     implementation("io.github.cdsap:projectgraphmetrics:0.1.0")
 }
 ```
 Get metrics:
-```
-    GraphParser(filePath).getIndicatorsByModule()
+```kotlin
+GraphParser(filePath).getIndicatorsByModule()
 ```
 #### CLI
 Example `nowinandroid`
-```
+```kotlin
 ./projetGraphMetrics --file=nowinandroid.dot
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                           Top Ten Module Report                                            │
@@ -50,30 +50,26 @@ Example `nowinandroid`
 
 ```
 Additionally, the CLI generates the following files:
-* modules_report.csv
-* modules_report.txt
-* top_ten_module_report.txt
+* `modules_report.csv`
+* `modules_report.txt`
+* `top_ten_module_report.txt`
 ##### Getting the CLI
-```
+```bash
  curl -L https://github.com/cdsap/ProjectGraphMetrics/releases/download/v0.1.0/projectGraphMetrics --output projectGraphMetrics
  chmod 0757 projectGenerator
-
 ```
 
 ### Generating Dot files
 Gradle Plugins generating graph files:
-#### Graph Assert
-https://github.com/jraska/modules-graph-assert
-```
- ./gradlew generateModulesGraphvizText -Pmodules.graph.output.gv=all_modules
-```
-
-#### Dependency Analysis
-https://github.com/autonomousapps/dependency-analysis-gradle-plugin
+- [jraska/modules-graph-assert](https://github.com/jraska/modules-graph-assert)
+  ```bash
+  ./gradlew generateModulesGraphvizText -Pmodules.graph.output.gv=all_modules
+  ```
+- [autonomousapps/dependency-analysis-gradle-plugin](https://github.com/autonomousapps/dependency-analysis-gradle-plugin)
 
 ### Libraries used
-* clikt
-* jgrapht-core
-* kotlin-statistics
-* picnic
-* fatBinary
+* [clikt](https://github.com/ajalt/clikt)
+* [jgrapht-core](https://github.com/jgrapht/jgrapht)
+* [kotlin-statistics](https://central.sonatype.com/artifact/org.nield/kotlin-statistics)
+* [picnic](https://github.com/JakeWharton/picnic)https://github.com/JakeWharton/picnic
+* [fatBinary](https://github.com/cdsap/FatBinary)https://github.com/cdsap/FatBinary
