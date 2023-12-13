@@ -66,6 +66,7 @@ Gradle Plugins generating graph files:
   ./gradlew generateModulesGraphvizText -Pmodules.graph.output.gv=all_modules
   ```
 - [autonomousapps/dependency-analysis-gradle-plugin](https://github.com/autonomousapps/dependency-analysis-gradle-plugin)
+- [siggijons/graph-untangler-plugin](https://github.com/siggijons/graph-untangler-plugin)
 
 ### Libraries used
 * [clikt](https://github.com/ajalt/clikt)
