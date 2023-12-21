@@ -56,7 +56,7 @@ Additionally, the CLI generates the following files:
 ##### Getting the CLI
 ```bash
 curl -L https://github.com/cdsap/ProjectGraphMetrics/releases/download/v0.1.0/projectGraphMetrics --output projectGraphMetrics
-chmod 0757 projectGenerator
+chmod 0757 projectGraphMetrics
 ```
 
 ### Generating Dot files
