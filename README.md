@@ -25,7 +25,7 @@ Example `nowinandroid`
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                           Top Ten Module Report                                            │
 ├──────────────────────────┬─────────────────────────┬────────────────────────────┬──────────────────────────┤
-│ Indegree                 │ Outdegree               │ BetweennessCentrality      │ Heigt                    │
+│ Indegree                 │ Outdegree               │ BetweennessCentrality      │ Height                   │
 ├─────────────────────┬────┼────────────────────┬────┼────────────────────┬───────┼──────────────────────┬───┤
 │ :core:model         │ 16 │ :app               │ 13 │ :core:data         │ 72.0  │ :app                 │ 7 │
 ├─────────────────────┼────┼────────────────────┼────┼────────────────────┼───────┼──────────────────────┼───┤
@@ -56,7 +56,7 @@ Additionally, the CLI generates the following files:
 ##### Getting the CLI
 ```bash
 curl -L https://github.com/cdsap/ProjectGraphMetrics/releases/download/v0.1.0/projectGraphMetrics --output projectGraphMetrics
-chmod 0757 projectGenerator
+chmod 0757 projectGraphMetrics
 ```
 
 ### Generating Dot files
