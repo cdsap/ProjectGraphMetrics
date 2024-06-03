@@ -21,7 +21,7 @@ GraphParser(filePath).getIndicatorsByModule()
 #### CLI
 Example `nowinandroid`
 ```kotlin
-./projetGraphMetrics --file=nowinandroid.dot
+./projectGraphMetrics --file=nowinandroid.dot
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                           Top Ten Module Report                                            │
 ├──────────────────────────┬─────────────────────────┬────────────────────────────┬──────────────────────────┤
