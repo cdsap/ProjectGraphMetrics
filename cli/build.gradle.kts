@@ -21,7 +21,7 @@ fatBinary {
 
 dependencies {
     implementation(project(":projectgraphmetrics"))
-    implementation("com.jakewharton.picnic:picnic:0.6.0")
+    implementation("com.jakewharton.picnic:picnic:0.7.0")
     implementation("com.github.ajalt.clikt:clikt:3.5.4")
     testImplementation("junit:junit:4.13.2")
     implementation(kotlin("stdlib-jdk8"))
