@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     implementation("org.jgrapht:jgrapht-core:1.5.2")
-    implementation("org.jgrapht:jgrapht-io:1.5.1")
+    implementation("org.jgrapht:jgrapht-io:1.5.2")
     implementation("org.nield:kotlin-statistics:1.2.1")
     testImplementation("junit:junit:4.13.2")
     implementation(kotlin("stdlib-jdk8"))
