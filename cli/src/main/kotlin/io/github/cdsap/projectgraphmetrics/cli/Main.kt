@@ -1,6 +1,7 @@
 package io.github.cdsap.projectgraphmetrics.cli
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.parameters.options.*
 import com.github.ajalt.clikt.parameters.types.file
 import io.github.cdsap.projectgraphmetrics.cli.view.GraphViewWriter
