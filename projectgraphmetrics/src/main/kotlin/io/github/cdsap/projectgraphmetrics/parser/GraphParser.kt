@@ -13,7 +13,7 @@ class GraphParser(private val fileGraph: String) {
     private val decimalFormat = DecimalFormat("#.##")
     private val result: SimpleDirectedGraph<String, DefaultEdge>
     private val betweennessCentrality: Map<String, Double>
-    private val nodes = mutableMapOf<String, Node>()
+    private val heightCalculator = HeightCalculator()
 
     init {
         checkFile()
@@ -27,7 +27,7 @@ class GraphParser(private val fileGraph: String) {
             it.toString().removeSurrounding("(", ")").replace(".", "_").split(" : ")
                 .let { parts -> parts[0] to parts[1] }
         }
-        edgesParsed.forEach { (from, to) -> addEdge(from, to) }
+        edgesParsed.forEach { (from, to) -> heightCalculator.addEdge(from, to) }
         betweennessCentrality = BetweennessCentrality(result).scores
     }
 
@@ -54,32 +54,7 @@ class GraphParser(private val fileGraph: String) {
         0
     }
 
-    fun heightOf(key: String): Int = nodes[key]?.height() ?: -1
-
-
-    class Node(val key: String) {
-        val dependsOn = mutableSetOf<Node>()
-        private var visited = false
-        private var calculatedHeight = -1
-
-        fun height(): Int {
-            if (visited) return 0
-            if (calculatedHeight == -1) {
-                visited = true
-                calculatedHeight = if (dependsOn.isEmpty()) 0 else (1 + dependsOn.maxOfOrNull { it.height() }!!)
-                visited = false
-            }
-            return calculatedHeight
-        }
-    }
-
-    private fun addEdge(from: String, to: String) {
-        getOrCreate(from).dependsOn.add(getOrCreate(to))
-    }
-
-    private fun getOrCreate(key: String): Node {
-        return nodes.getOrPut(key) { Node(key) }
-    }
+    fun heightOf(key: String): Int = heightCalculator.heightOf(key)
 
     fun getIndicatorsByModule(): Map<String, GraphMetric> {
         return result().vertexSet().associateWith {
