@@ -1,7 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm") version "1.9.25"
+    kotlin("jvm") version "2.3.0"
     application
     id("io.github.cdsap.fatbinary") version "1.0"
 }
@@ -22,20 +20,17 @@ fatBinary {
 dependencies {
     implementation(project(":projectgraphmetrics"))
     implementation("com.jakewharton.picnic:picnic:0.7.0")
-    implementation("com.github.ajalt.clikt:clikt:4.4.0")
+    implementation("com.github.ajalt.clikt:clikt:5.1.0")
     testImplementation("junit:junit:4.13.2")
     implementation(kotlin("stdlib-jdk8"))
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 application {
     mainClass.set("io.github.cdsap.projectgraphmetrics.cli.MainKt")
-}
-
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = "17"
 }
