@@ -4,9 +4,6 @@ import io.github.cdsap.projectgraphmetrics.model.GraphMetric
 import org.jgrapht.alg.scoring.BetweennessCentrality
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleDirectedGraph
-import org.jgrapht.nio.dot.DOTImporter
-import java.io.File
-import java.io.FileNotFoundException
 import java.text.DecimalFormat
 
 class GraphParser(private val fileGraph: String) {
@@ -16,12 +13,7 @@ class GraphParser(private val fileGraph: String) {
     private val heightCalculator = HeightCalculator()
 
     init {
-        checkFile()
-        val importer = DOTImporter<String, DefaultEdge>().apply {
-            setVertexFactory { it }
-        }
-        result = SimpleDirectedGraph<String, DefaultEdge>(DefaultEdge::class.java)
-        importer.importGraph(result, File(fileGraph))
+        result = DotGraphLoader().load(fileGraph)
 
         val edgesParsed = result.edgeSet().map {
             it.toString().removeSurrounding("(", ")").replace(".", "_").split(" : ")
@@ -29,12 +21,6 @@ class GraphParser(private val fileGraph: String) {
         }
         edgesParsed.forEach { (from, to) -> heightCalculator.addEdge(from, to) }
         betweennessCentrality = BetweennessCentrality(result).scores
-    }
-
-    private fun checkFile() {
-        if (!File(fileGraph).exists()) {
-            throw FileNotFoundException("$fileGraph not found")
-        }
     }
 
     fun result() = result
