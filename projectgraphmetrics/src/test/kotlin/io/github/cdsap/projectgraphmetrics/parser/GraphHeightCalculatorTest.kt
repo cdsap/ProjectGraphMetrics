@@ -4,13 +4,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class HeightCalculatorTest {
+class GraphHeightCalculatorTest {
 
     @Test
     fun heightOfSimpleDependencyChain() {
-        val calculator = HeightCalculator()
-        calculator.addEdge("A", "B")
-        calculator.addEdge("B", "C")
+        val calculator = GraphHeightCalculator(
+            listOf("A" to "B", "B" to "C")
+        )
 
         assertEquals(0, calculator.heightOf("C"))
         assertEquals(1, calculator.heightOf("B"))
@@ -19,15 +19,14 @@ class HeightCalculatorTest {
 
     @Test
     fun heightOfUnknownModuleIsMinusOne() {
-        val calculator = HeightCalculator()
-        calculator.addEdge("A", "B")
+        val calculator = GraphHeightCalculator(listOf("A" to "B"))
 
         assertEquals(-1, calculator.heightOf("missing"))
     }
 
     @Test
     fun cycleGuardReturnsFiniteHeight() {
-        val calculator = HeightCalculator()
+        val calculator = GraphHeightCalculator()
         calculator.addEdge("A", "B")
         calculator.addEdge("B", "A")
 
@@ -38,5 +37,12 @@ class HeightCalculatorTest {
         assertTrue(heightB >= 0)
         assertEquals(2, heightA)
         assertEquals(1, heightB)
+    }
+
+    @Test
+    fun heightOfEmptyEdgeListIsMinusOne() {
+        val calculator = GraphHeightCalculator(emptyList())
+
+        assertEquals(-1, calculator.heightOf("A"))
     }
 }

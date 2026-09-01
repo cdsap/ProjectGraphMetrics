@@ -10,7 +10,7 @@ class GraphParser(private val fileGraph: String) {
     private val decimalFormat = DecimalFormat("#.##")
     private val result: SimpleDirectedGraph<String, DefaultEdge>
     private val betweennessCentrality: Map<String, Double>
-    private val heightCalculator = HeightCalculator()
+    private val heightCalculator: GraphHeightCalculator
 
     init {
         result = DotGraphLoader().load(fileGraph)
@@ -19,7 +19,7 @@ class GraphParser(private val fileGraph: String) {
             it.toString().removeSurrounding("(", ")").replace(".", "_").split(" : ")
                 .let { parts -> parts[0] to parts[1] }
         }
-        edgesParsed.forEach { (from, to) -> heightCalculator.addEdge(from, to) }
+        heightCalculator = GraphHeightCalculator(edgesParsed)
         betweennessCentrality = BetweennessCentrality(result).scores
     }
 
