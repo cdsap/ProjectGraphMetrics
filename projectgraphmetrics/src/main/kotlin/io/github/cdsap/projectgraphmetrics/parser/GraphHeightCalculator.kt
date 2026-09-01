@@ -1,7 +1,13 @@
 package io.github.cdsap.projectgraphmetrics.parser
 
-internal class HeightCalculator {
+internal class GraphHeightCalculator(
+    edges: List<Pair<String, String>> = emptyList()
+) {
     private val nodes = mutableMapOf<String, Node>()
+
+    init {
+        edges.forEach { (from, to) -> addEdge(from, to) }
+    }
 
     fun addEdge(from: String, to: String) {
         getOrCreate(from).dependsOn.add(getOrCreate(to))
