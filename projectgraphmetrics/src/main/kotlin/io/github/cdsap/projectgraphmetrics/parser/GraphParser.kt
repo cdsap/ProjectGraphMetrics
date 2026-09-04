@@ -6,15 +6,14 @@ import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleDirectedGraph
 import java.text.DecimalFormat
 
-class GraphParser(private val fileGraph: String) {
+class GraphParser(private val result: SimpleDirectedGraph<String, DefaultEdge>) {
     private val decimalFormat = DecimalFormat("#.##")
-    private val result: SimpleDirectedGraph<String, DefaultEdge>
     private val betweennessCentrality: Map<String, Double>
     private val heightCalculator: GraphHeightCalculator
 
-    init {
-        result = DotGraphLoader().load(fileGraph)
+    constructor(fileGraph: String) : this(DotGraphLoader().load(fileGraph))
 
+    init {
         val edgesParsed = result.edgeSet().map {
             it.toString().removeSurrounding("(", ")").replace(".", "_").split(" : ")
                 .let { parts -> parts[0] to parts[1] }
