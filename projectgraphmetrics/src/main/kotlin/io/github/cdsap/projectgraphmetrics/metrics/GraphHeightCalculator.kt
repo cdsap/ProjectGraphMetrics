@@ -1,4 +1,4 @@
-package io.github.cdsap.projectgraphmetrics.parser
+package io.github.cdsap.projectgraphmetrics.metrics
 
 internal class GraphHeightCalculator(
     edges: List<Pair<String, String>> = emptyList()

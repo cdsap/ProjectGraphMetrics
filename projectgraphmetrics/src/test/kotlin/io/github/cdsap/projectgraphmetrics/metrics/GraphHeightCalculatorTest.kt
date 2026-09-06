@@ -1,4 +1,4 @@
-package io.github.cdsap.projectgraphmetrics.parser
+package io.github.cdsap.projectgraphmetrics.metrics
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
