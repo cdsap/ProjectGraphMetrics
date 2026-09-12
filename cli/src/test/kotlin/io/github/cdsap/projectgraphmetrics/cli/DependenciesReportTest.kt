@@ -63,6 +63,7 @@ class DependenciesReportTest {
             ).first { it.exists() }.readText()
 
         assertTrue(mainSource.contains("import io.github.cdsap.projectgraphmetrics.ProjectGraphMetrics"))
+        assertTrue(mainSource.contains("ProjectGraphMetrics(file).getMetrics()"))
         assertFalse(mainSource.contains("parser.GraphParser"))
         assertFalse(mainSource.contains("GraphParser("))
     }
