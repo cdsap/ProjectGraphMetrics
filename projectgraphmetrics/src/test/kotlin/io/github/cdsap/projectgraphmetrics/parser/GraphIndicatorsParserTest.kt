@@ -96,4 +96,42 @@ class GraphIndicatorsParserTest {
 
         assertEquals(calculatorMetrics, parserMetrics)
     }
+
+    @Test
+    fun testEdgeEndpointsDoNotRelyOnDefaultEdgeToString() {
+        val graph = SimpleDirectedGraph<String, DefaultEdge>(DefaultEdge::class.java)
+        val from = ":feature:with : delimiter"
+        val to = ":core:with : delimiter"
+        graph.addVertex(from)
+        graph.addVertex(to)
+        val edge = graph.addEdge(from, to)
+
+        assertTrue(edge.toString().contains(" : "))
+
+        val metrics = GraphParser(graph).getIndicatorsByModule()
+
+        assertEquals(1, metrics[from]?.height)
+        assertEquals(0, metrics[to]?.height)
+        assertEquals(1, metrics[from]?.outdegree)
+        assertEquals(1, metrics[to]?.indegree)
+        assertEquals(0, metrics[from]?.indegree)
+        assertEquals(0, metrics[to]?.outdegree)
+    }
+
+    @Test
+    fun testDotToUnderscoreNormalizationIsPreservedForHeight() {
+        val graph = SimpleDirectedGraph<String, DefaultEdge>(DefaultEdge::class.java)
+        val from = ":app.feature"
+        val to = ":lib.core"
+        graph.addVertex(from)
+        graph.addVertex(to)
+        graph.addEdge(from, to)
+
+        val metrics = GraphParser(graph).getIndicatorsByModule()
+
+        assertEquals(1, metrics[from]?.height)
+        assertEquals(0, metrics[to]?.height)
+        assertEquals(1, metrics[from]?.outdegree)
+        assertEquals(1, metrics[to]?.indegree)
+    }
 }
