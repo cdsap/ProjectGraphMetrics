@@ -14,10 +14,7 @@ class GraphMetricsCalculator(
     private val heightCalculator: GraphHeightCalculator
 
     init {
-        val edgesParsed = graph.edgeSet().map { edge ->
-            graph.getEdgeSource(edge) to graph.getEdgeTarget(edge)
-        }
-        heightCalculator = GraphHeightCalculator(edgesParsed)
+        heightCalculator = GraphHeightCalculator(dependencyEdges())
         betweennessCentrality = BetweennessCentrality(graph).scores
     }
 
@@ -31,6 +28,13 @@ class GraphMetricsCalculator(
             )
         }
     }
+
+    private fun dependencyEdges(): List<Pair<String, String>> =
+        graph.edgeSet().map { edge ->
+            normalizeModule(graph.getEdgeSource(edge)) to normalizeModule(graph.getEdgeTarget(edge))
+        }
+
+    private fun normalizeModule(module: String) = module.replace(".", "_")
 
     private fun betweennessCentrality(module: String) =
         decimalFormat.format(betweennessCentrality[module] ?: 0.0).toDouble()
@@ -47,5 +51,5 @@ class GraphMetricsCalculator(
         0
     }
 
-    private fun heightOf(key: String): Int = heightCalculator.heightOf(key)
+    private fun heightOf(key: String): Int = heightCalculator.heightOf(normalizeModule(key))
 }
