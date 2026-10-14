@@ -30,6 +30,25 @@ class GraphMetricsCalculatorTest {
     }
 
     @Test
+    fun heightUsesTheSuppliedDependencyModel() {
+        val graph = SimpleDirectedGraph<String, DefaultEdge>(DefaultEdge::class.java)
+        graph.addVertex(":app")
+        graph.addVertex(":feature")
+        graph.addVertex(":core")
+        graph.addEdge(":app", ":feature")
+        graph.addEdge(":feature", ":core")
+
+        val metrics = GraphMetricsCalculator(
+            graph,
+            listOf(":app" to ":core")
+        ).getIndicatorsByModule()
+
+        assertEquals(1, metrics[":app"]?.height)
+        assertEquals(-1, metrics[":feature"]?.height)
+        assertEquals(0, metrics[":core"]?.height)
+    }
+
+    @Test
     fun metricsFromLoadedDotFileMatchExpectedValues() {
         val file = File(this::class.java.classLoader!!.getResource("graph.dot")?.path)
         val graph = DotGraphLoader().load(file.path)

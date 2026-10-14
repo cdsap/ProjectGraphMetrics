@@ -12,6 +12,11 @@ class GraphParser(private val result: SimpleDirectedGraph<String, DefaultEdge>) 
     fun result() = result
 
     fun getIndicatorsByModule(): Map<String, GraphMetric> {
-        return GraphMetricsCalculator(result).getIndicatorsByModule()
+        return GraphMetricsCalculator(result, dependencyEdges()).getIndicatorsByModule()
     }
+
+    private fun dependencyEdges(): List<Pair<String, String>> =
+        result.edgeSet().map { edge ->
+            result.getEdgeSource(edge) to result.getEdgeTarget(edge)
+        }
 }
