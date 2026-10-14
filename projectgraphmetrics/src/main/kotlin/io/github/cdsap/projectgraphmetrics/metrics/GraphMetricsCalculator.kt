@@ -7,14 +7,24 @@ import org.jgrapht.graph.SimpleDirectedGraph
 import java.text.DecimalFormat
 
 class GraphMetricsCalculator(
-    private val graph: SimpleDirectedGraph<String, DefaultEdge>
+    private val graph: SimpleDirectedGraph<String, DefaultEdge>,
+    dependencyEdges: List<Pair<String, String>>
 ) {
+    constructor(graph: SimpleDirectedGraph<String, DefaultEdge>) : this(
+        graph,
+        graph.edgeSet().map { edge ->
+            graph.getEdgeSource(edge) to graph.getEdgeTarget(edge)
+        }
+    )
+
     private val decimalFormat = DecimalFormat("#.##")
     private val betweennessCentrality: Map<String, Double>
     private val heightCalculator: GraphHeightCalculator
 
     init {
-        heightCalculator = GraphHeightCalculator(dependencyEdges())
+        heightCalculator = GraphHeightCalculator(dependencyEdges.map { (from, to) ->
+            normalizeModule(from) to normalizeModule(to)
+        })
         betweennessCentrality = BetweennessCentrality(graph).scores
     }
 
@@ -28,11 +38,6 @@ class GraphMetricsCalculator(
             )
         }
     }
-
-    private fun dependencyEdges(): List<Pair<String, String>> =
-        graph.edgeSet().map { edge ->
-            normalizeModule(graph.getEdgeSource(edge)) to normalizeModule(graph.getEdgeTarget(edge))
-        }
 
     private fun normalizeModule(module: String) = module.replace(".", "_")
 
