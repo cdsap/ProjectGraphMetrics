@@ -49,6 +49,21 @@ class GraphMetricsCalculatorTest {
     }
 
     @Test
+    fun graphOnlyCalculatorUsesGraphEdgeEndpoints() {
+        val graph = SimpleDirectedGraph<String, DefaultEdge>(DefaultEdge::class.java)
+        val from = ":feature:with : delimiter"
+        val to = ":core:with : delimiter"
+        graph.addVertex(from)
+        graph.addVertex(to)
+        graph.addEdge(from, to)
+
+        val metrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
+
+        assertEquals(1, metrics[from]?.height)
+        assertEquals(0, metrics[to]?.height)
+    }
+
+    @Test
     fun metricsFromLoadedDotFileMatchExpectedValues() {
         val file = File(this::class.java.classLoader!!.getResource("graph.dot")?.path)
         val graph = DotGraphLoader().load(file.path)
