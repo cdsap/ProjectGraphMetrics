@@ -6,15 +6,18 @@ import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleDirectedGraph
 import java.text.DecimalFormat
 
+private fun SimpleDirectedGraph<String, DefaultEdge>.dependencyEdges(): List<Pair<String, String>> =
+    edgeSet().map { edge ->
+        getEdgeSource(edge) to getEdgeTarget(edge)
+    }
+
 class GraphMetricsCalculator(
     private val graph: SimpleDirectedGraph<String, DefaultEdge>,
     dependencyEdges: List<Pair<String, String>>
 ) {
     constructor(graph: SimpleDirectedGraph<String, DefaultEdge>) : this(
         graph,
-        graph.edgeSet().map { edge ->
-            graph.getEdgeSource(edge) to graph.getEdgeTarget(edge)
-        }
+        graph.dependencyEdges()
     )
 
     private val decimalFormat = DecimalFormat("#.##")
