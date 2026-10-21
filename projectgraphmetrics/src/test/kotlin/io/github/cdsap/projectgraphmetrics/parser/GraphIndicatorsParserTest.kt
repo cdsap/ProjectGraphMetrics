@@ -1,7 +1,7 @@
 package io.github.cdsap.projectgraphmetrics.parser
 
 import io.github.cdsap.projectgraphmetrics.ProjectGraphMetrics
-import io.github.cdsap.projectgraphmetrics.metrics.GraphMetricsCalculator
+import io.github.cdsap.projectgraphmetrics.model.GraphMetricCalculator
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleDirectedGraph
 import org.junit.Assert.*
@@ -73,7 +73,7 @@ class GraphIndicatorsParserTest {
         graph.addEdge(":app", ":feature")
         graph.addEdge(":feature", ":core")
 
-        val metrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
+        val metrics = GraphMetricCalculator(graph).getIndicatorsByModule()
 
         assertEquals(2, metrics[":app"]?.height)
         assertEquals(1, metrics[":feature"]?.height)
@@ -92,7 +92,7 @@ class GraphIndicatorsParserTest {
         graph.addEdge(":app", ":core")
 
         val parserMetrics = GraphParser(graph).getIndicatorsByModule()
-        val calculatorMetrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
+        val calculatorMetrics = GraphMetricCalculator(graph).getIndicatorsByModule()
 
         assertEquals(calculatorMetrics, parserMetrics)
     }

@@ -1,4 +1,4 @@
-package io.github.cdsap.projectgraphmetrics.metrics
+package io.github.cdsap.projectgraphmetrics.model
 
 import io.github.cdsap.projectgraphmetrics.parser.DotGraphLoader
 import org.jgrapht.graph.DefaultEdge
@@ -7,7 +7,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.io.File
 
-class GraphMetricsCalculatorTest {
+class GraphMetricCalculatorTest {
 
     @Test
     fun metricsFromInMemoryGraphMatchExpectedValues() {
@@ -18,7 +18,7 @@ class GraphMetricsCalculatorTest {
         graph.addEdge(":app", ":feature")
         graph.addEdge(":feature", ":core")
 
-        val metrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
+        val metrics = GraphMetricCalculator(graph).getIndicatorsByModule()
 
         assertEquals(2, metrics[":app"]?.height)
         assertEquals(1, metrics[":feature"]?.height)
@@ -38,7 +38,7 @@ class GraphMetricsCalculatorTest {
         graph.addEdge(":app", ":feature")
         graph.addEdge(":feature", ":core")
 
-        val metrics = GraphMetricsCalculator(
+        val metrics = GraphMetricCalculator(
             graph,
             listOf(":app" to ":core")
         ).getIndicatorsByModule()
@@ -57,7 +57,7 @@ class GraphMetricsCalculatorTest {
         graph.addVertex(to)
         graph.addEdge(from, to)
 
-        val metrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
+        val metrics = GraphMetricCalculator(graph).getIndicatorsByModule()
 
         assertEquals(1, metrics[from]?.height)
         assertEquals(0, metrics[to]?.height)
@@ -68,7 +68,7 @@ class GraphMetricsCalculatorTest {
         val file = File(this::class.java.classLoader!!.getResource("graph.dot")?.path)
         val graph = DotGraphLoader().load(file.path)
 
-        val metrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
+        val metrics = GraphMetricCalculator(graph).getIndicatorsByModule()
 
         assertEquals(1, metrics[":layer_1:module_1_54"]?.height)
         assertEquals(4, metrics[":layer_1:module_1_54"]?.outdegree)
