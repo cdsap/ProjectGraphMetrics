@@ -1,6 +1,6 @@
-package io.github.cdsap.projectgraphmetrics.model
+package io.github.cdsap.projectgraphmetrics.metrics
 
-import io.github.cdsap.projectgraphmetrics.metrics.GraphHeightCalculator
+import io.github.cdsap.projectgraphmetrics.model.GraphMetric
 import org.jgrapht.alg.scoring.BetweennessCentrality
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleDirectedGraph
@@ -11,7 +11,7 @@ private fun SimpleDirectedGraph<String, DefaultEdge>.dependencyEdges(): List<Pai
         getEdgeSource(edge) to getEdgeTarget(edge)
     }
 
-class GraphMetricCalculator(
+class GraphMetricsCalculator(
     private val graph: SimpleDirectedGraph<String, DefaultEdge>,
     dependencyEdges: List<Pair<String, String>>
 ) {

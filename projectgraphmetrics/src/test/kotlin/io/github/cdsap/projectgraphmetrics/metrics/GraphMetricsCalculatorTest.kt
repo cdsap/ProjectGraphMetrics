@@ -1,13 +1,13 @@
-package io.github.cdsap.projectgraphmetrics.model
+package io.github.cdsap.projectgraphmetrics.metrics
 
 import io.github.cdsap.projectgraphmetrics.parser.DotGraphLoader
-import org.jgrapht.graph.DefaultEdge
-import org.jgrapht.graph.SimpleDirectedGraph
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.jgrapht.graph.DefaultEdge
+import org.jgrapht.graph.SimpleDirectedGraph
 import java.io.File
 
-class GraphMetricCalculatorTest {
+class GraphMetricsCalculatorTest {
 
     @Test
     fun metricsFromInMemoryGraphMatchExpectedValues() {
@@ -18,7 +18,7 @@ class GraphMetricCalculatorTest {
         graph.addEdge(":app", ":feature")
         graph.addEdge(":feature", ":core")
 
-        val metrics = GraphMetricCalculator(graph).getIndicatorsByModule()
+        val metrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
 
         assertEquals(2, metrics[":app"]?.height)
         assertEquals(1, metrics[":feature"]?.height)
@@ -38,7 +38,7 @@ class GraphMetricCalculatorTest {
         graph.addEdge(":app", ":feature")
         graph.addEdge(":feature", ":core")
 
-        val metrics = GraphMetricCalculator(
+        val metrics = GraphMetricsCalculator(
             graph,
             listOf(":app" to ":core")
         ).getIndicatorsByModule()
@@ -57,7 +57,7 @@ class GraphMetricCalculatorTest {
         graph.addVertex(to)
         graph.addEdge(from, to)
 
-        val metrics = GraphMetricCalculator(graph).getIndicatorsByModule()
+        val metrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
 
         assertEquals(1, metrics[from]?.height)
         assertEquals(0, metrics[to]?.height)
@@ -68,7 +68,7 @@ class GraphMetricCalculatorTest {
         val file = File(this::class.java.classLoader!!.getResource("graph.dot")?.path)
         val graph = DotGraphLoader().load(file.path)
 
-        val metrics = GraphMetricCalculator(graph).getIndicatorsByModule()
+        val metrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
 
         assertEquals(1, metrics[":layer_1:module_1_54"]?.height)
         assertEquals(4, metrics[":layer_1:module_1_54"]?.outdegree)
