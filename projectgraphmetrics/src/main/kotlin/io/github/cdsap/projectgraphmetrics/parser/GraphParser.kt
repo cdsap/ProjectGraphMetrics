@@ -1,7 +1,7 @@
 package io.github.cdsap.projectgraphmetrics.parser
 
 import io.github.cdsap.projectgraphmetrics.model.GraphMetric
-import io.github.cdsap.projectgraphmetrics.model.GraphMetricCalculator
+import io.github.cdsap.projectgraphmetrics.metrics.GraphMetricsCalculator
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleDirectedGraph
 
@@ -12,6 +12,6 @@ class GraphParser(private val result: SimpleDirectedGraph<String, DefaultEdge>) 
     fun result() = result
 
     fun getIndicatorsByModule(): Map<String, GraphMetric> {
-        return GraphMetricCalculator(result).getIndicatorsByModule()
+        return GraphMetricsCalculator(result).getIndicatorsByModule()
     }
 }
