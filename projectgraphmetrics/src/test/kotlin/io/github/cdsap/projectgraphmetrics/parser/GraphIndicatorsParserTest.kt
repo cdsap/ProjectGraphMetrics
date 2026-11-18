@@ -44,9 +44,9 @@ class GraphIndicatorsParserTest {
     }
 
     @Test
-    fun testDotGraphLoaderLoadsDotFile() {
+    fun testDotGraphReaderReadsDotFile() {
         val file = File(this::class.java.classLoader!!.getResource("graph.dot")?.path)
-        val graph = DotGraphLoader().load(file.path)
+        val graph = DotGraphReader().read(file.path)
         assertTrue(graph.containsVertex(":layer_1:module_1_54"))
         assertEquals(4, graph.outDegreeOf(":layer_1:module_1_54"))
         assertEquals(10, graph.inDegreeOf(":layer_1:module_1_54"))
@@ -55,7 +55,7 @@ class GraphIndicatorsParserTest {
     @Test
     fun testMetricsFromAlreadyLoadedGraph() {
         val file = File(this::class.java.classLoader!!.getResource("graph.dot")?.path)
-        val loadedGraph = DotGraphLoader().load(file.path)
+        val loadedGraph = DotGraphReader().read(file.path)
         val metrics = GraphParser(loadedGraph).getIndicatorsByModule()
 
         assertEquals(1, metrics[":layer_1:module_1_54"]?.height)

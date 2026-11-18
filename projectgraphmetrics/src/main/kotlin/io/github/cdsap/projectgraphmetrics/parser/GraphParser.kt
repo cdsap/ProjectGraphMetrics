@@ -7,7 +7,7 @@ import org.jgrapht.graph.SimpleDirectedGraph
 
 class GraphParser(private val result: SimpleDirectedGraph<String, DefaultEdge>) {
 
-    constructor(fileGraph: String) : this(DotGraphLoader().load(fileGraph))
+    constructor(fileGraph: String) : this(DotGraphReader().read(fileGraph))
 
     fun result() = result
 

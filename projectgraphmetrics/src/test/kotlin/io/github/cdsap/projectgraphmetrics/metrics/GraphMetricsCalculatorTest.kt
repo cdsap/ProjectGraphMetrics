@@ -1,6 +1,6 @@
 package io.github.cdsap.projectgraphmetrics.metrics
 
-import io.github.cdsap.projectgraphmetrics.parser.DotGraphLoader
+import io.github.cdsap.projectgraphmetrics.parser.DotGraphReader
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.jgrapht.graph.DefaultEdge
@@ -66,7 +66,7 @@ class GraphMetricsCalculatorTest {
     @Test
     fun metricsFromLoadedDotFileMatchExpectedValues() {
         val file = File(this::class.java.classLoader!!.getResource("graph.dot")?.path)
-        val graph = DotGraphLoader().load(file.path)
+        val graph = DotGraphReader().read(file.path)
 
         val metrics = GraphMetricsCalculator(graph).getIndicatorsByModule()
 

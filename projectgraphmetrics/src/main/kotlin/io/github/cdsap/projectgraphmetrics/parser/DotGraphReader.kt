@@ -6,9 +6,9 @@ import org.jgrapht.nio.dot.DOTImporter
 import java.io.File
 import java.io.FileNotFoundException
 
-internal class DotGraphLoader {
+internal class DotGraphReader {
 
-    fun load(fileGraph: String): SimpleDirectedGraph<String, DefaultEdge> {
+    fun read(fileGraph: String): SimpleDirectedGraph<String, DefaultEdge> {
         checkFile(fileGraph)
         val importer = DOTImporter<String, DefaultEdge>().apply {
             setVertexFactory { it }
