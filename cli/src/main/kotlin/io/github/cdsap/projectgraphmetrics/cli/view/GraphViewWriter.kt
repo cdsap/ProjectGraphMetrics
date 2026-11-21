@@ -50,7 +50,7 @@ class GraphViewWriter(private val modules: Map<String, GraphMetric>) {
         if (File(filesOutput.moduleReportCsv).exists()) {
             File(filesOutput.moduleReportCsv).delete()
         }
-        File(filesOutput.moduleReportCsv).writeText(renderer.renderCsv())
+        File(filesOutput.moduleReportCsv).writeText(CsvReportRenderer().render(modules))
         if (File(filesOutput.moduleReportCsv).exists()) {
             println("${filesOutput.moduleReportCsv} created")
         }
