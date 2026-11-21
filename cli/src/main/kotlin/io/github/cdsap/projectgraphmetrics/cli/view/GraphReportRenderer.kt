@@ -104,12 +104,5 @@ class GraphReportRenderer(private val modules: Map<String, GraphMetric>) {
             }
         }.renderText()
 
-    fun renderCsv(): String {
-        val headers = "Module,Indegree,Outdegree,BetweennessCentrality,Height\n"
-        var values = ""
-        modules.toSortedMap().forEach {
-            values += "${it.key},${it.value.indegree},${it.value.outdegree},${it.value.betweennessCentrality},${it.value.height}\n"
-        }
-        return """$headers$values""".trimIndent()
-    }
+    fun renderCsv(): String = CsvReportRenderer().render(modules)
 }
