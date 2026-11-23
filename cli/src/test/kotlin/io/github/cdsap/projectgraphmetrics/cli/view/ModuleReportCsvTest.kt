@@ -4,13 +4,13 @@ import io.github.cdsap.projectgraphmetrics.model.GraphMetric
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CsvReportRendererTest {
+class ModuleReportCsvTest {
 
     @Test
     fun emptyInputProducesOnlyHeaderWithoutTrailingNewline() {
         assertEquals(
             "Module,Indegree,Outdegree,BetweennessCentrality,Height",
-            CsvReportRenderer().render(emptyMap())
+            renderModuleReportCsv(emptyMap())
         )
     }
 
@@ -27,7 +27,7 @@ class CsvReportRendererTest {
                 ":app,0,2,0.5,3\n" +
                 ":core,2,0,0.0,1\n" +
                 ":feature,1,1,1.5,2",
-            CsvReportRenderer().render(modules)
+            renderModuleReportCsv(modules)
         )
     }
 
@@ -42,7 +42,7 @@ class CsvReportRendererTest {
             "Module,Indegree,Outdegree,BetweennessCentrality,Height\n" +
                 ":small,0,0,1.0E-4,0\n" +
                 ":zero,0,0,-0.0,0",
-            CsvReportRenderer().render(modules)
+            renderModuleReportCsv(modules)
         )
     }
 }
