@@ -10,7 +10,7 @@ class CsvReportRendererTest {
     fun emptyInputProducesOnlyHeaderWithoutTrailingNewline() {
         assertEquals(
             "Module,Indegree,Outdegree,BetweennessCentrality,Height",
-            renderCsvReport(emptyMap())
+            CsvReportRenderer.render(emptyMap())
         )
     }
 
@@ -27,7 +27,7 @@ class CsvReportRendererTest {
                 ":app,0,2,0.5,3\n" +
                 ":core,2,0,0.0,1\n" +
                 ":feature,1,1,1.5,2",
-            renderCsvReport(modules)
+            CsvReportRenderer.render(modules)
         )
     }
 
@@ -42,7 +42,7 @@ class CsvReportRendererTest {
             "Module,Indegree,Outdegree,BetweennessCentrality,Height\n" +
                 ":small,0,0,1.0E-4,0\n" +
                 ":zero,0,0,-0.0,0",
-            renderCsvReport(modules)
+            CsvReportRenderer.render(modules)
         )
     }
 }

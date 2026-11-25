@@ -104,5 +104,5 @@ class GraphReportRenderer(private val modules: Map<String, GraphMetric>) {
             }
         }.renderText()
 
-    fun renderCsv(): String = renderCsvReport(modules)
+    fun renderCsv(): String = CsvReportRenderer.render(modules)
 }
