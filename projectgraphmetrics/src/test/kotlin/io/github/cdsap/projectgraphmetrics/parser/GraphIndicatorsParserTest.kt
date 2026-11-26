@@ -104,9 +104,9 @@ class GraphIndicatorsParserTest {
         val to = ":core:with : delimiter"
         graph.addVertex(from)
         graph.addVertex(to)
-        val edge = graph.addEdge(from, to)
-
-        assertTrue(edge.toString().contains(" : "))
+        graph.addEdge(from, to, object : DefaultEdge() {
+            override fun toString() = "dependency"
+        })
 
         val metrics = GraphParser(graph).getIndicatorsByModule()
 
